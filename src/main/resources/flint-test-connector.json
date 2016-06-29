@@ -1,0 +1,7 @@
+
+{
+    "main": "com.infiverve.flint.connector.test.TestConnectorService",
+    "options": {
+        "worker": true
+    }
+}

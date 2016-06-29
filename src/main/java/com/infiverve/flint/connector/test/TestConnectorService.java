@@ -1,16 +1,8 @@
-package com.infiverve.flint.connector.test;
-
-import com.infiverve.flint.exception.EncryptionException;
-import com.infiverve.flint.sdk.connectors.FlintConnectorBase;
-import com.infiverve.flint.sdk.connectors.FlintConnectorRequest;
-import com.infiverve.flint.sdk.connectors.exceptions.FlintConnectorException;
-import com.infiverve.flint.sdk.logger.FlintLogger;
-import io.vertx.core.json.JsonObject;
 
 /*
- * Copyright 2013 Red Hat, Inc.
+ * Copyright 2016 Infiverve Technologies.
  *
- * Red Hat licenses this file to you under the Apache License, version 2.0
+ * Infiverve Technologies licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -22,11 +14,18 @@ import io.vertx.core.json.JsonObject;
  * License for the specific language governing permissions and limitations
  * under the License.
  *
- * @author <a href="http://tfox.org">Tim Fox</a>
+ * @author shweta
  */
-/*
- This is a simple Java verticle which receives `ping` messages on the event bus and sends back `pong` replies
- */
+
+package com.infiverve.flint.connector.test;
+
+import com.infiverve.flint.exception.EncryptionException;
+import com.infiverve.flint.sdk.connectors.FlintConnectorBase;
+import com.infiverve.flint.sdk.connectors.FlintConnectorRequest;
+import com.infiverve.flint.sdk.connectors.exceptions.FlintConnectorException;
+import com.infiverve.flint.sdk.logger.FlintLogger;
+import io.vertx.core.json.JsonObject;
+
 public class TestConnectorService extends FlintConnectorBase {
 
     private String username = null;
@@ -34,17 +33,16 @@ public class TestConnectorService extends FlintConnectorBase {
     private static String name = null;
 
     /**
-     * Starts the connector.
-     * Configuration Parameters are available here.
+     * Starts the connector. Configuration Parameters are available here.
      *
      * @param config - JSON object containing connector configuration data
      * @throws FlintConnectorException
      */
     @Override
     protected void enable(JsonObject config) throws FlintConnectorException {
-        
+
         FlintLogger.PLATFORM_LOGGER.info("Test connector module started");
-        
+
         /**
          * process connector configuration data
          *
@@ -85,6 +83,7 @@ public class TestConnectorService extends FlintConnectorBase {
 
     /**
      * Stop's the connector.
+     *
      * @throws FlintConnectorException
      */
     @Override
@@ -97,15 +96,16 @@ public class TestConnectorService extends FlintConnectorBase {
     }
 
     /**
-     * Processes the job request being submitted
-     * and performs the connector action.
+     * Processes the job request being submitted and performs the connector
+     * action.
+     *
      * @param request - connector request which contains all request data
      */
     @Override
     protected void onRequest(FlintConnectorRequest request) {
-        
+
         FlintLogger.JOB_LOGGER.info("Request received inside onRequest method..");
-        final  JsonObject requestJson;
+        final JsonObject requestJson;
         final JsonObject response = new JsonObject();
         String username = null, password = null, jobId = null;
 
@@ -116,13 +116,10 @@ public class TestConnectorService extends FlintConnectorBase {
                 jobId = "NO JOBID";
             }
 
-            
-            
-            
             if (request.getRequestJson() != null) {
                 //connector request parameters
                 final JsonObject receivedBody = request.getRequestJson();
-                
+
                 //name of the action connector is going to perform
                 if (receivedBody.containsKey(STATIC.FIELD.ACTION) && receivedBody.getString(STATIC.FIELD.ACTION).equals(STATIC.FIELD.AUTHENTICATE)) {
 
@@ -131,16 +128,16 @@ public class TestConnectorService extends FlintConnectorBase {
                      */
                     if (receivedBody.containsKey(STATIC.FIELD.USERNAME)) {
                         username = receivedBody.getString(STATIC.FIELD.USERNAME);
-                        
+
                         /**
-                         * append job-id in every log statement for identification of request
+                         * append job-id in every log statement for
+                         * identification of request
                          */
                         FlintLogger.JOB_LOGGER.debug(jobId + " Getting username from request " + username);
                     } else {
                         /**
                          * if username is not passed as a request parameter
-                         * username from config parameter
-                         * will be used
+                         * username from config parameter will be used
                          */
                         username = this.username;
                         FlintLogger.JOB_LOGGER.debug(jobId + " Getting username from config " + username);
@@ -153,8 +150,8 @@ public class TestConnectorService extends FlintConnectorBase {
                         password = receivedBody.getString(STATIC.FIELD.PASSWORD);
                         if (password != null && !password.isEmpty()) {
                             /**
-                             * checks if password is encrypted, if yes
-                             * password is decrypted
+                             * checks if password is encrypted, if yes password
+                             * is decrypted
                              */
                             if (password.startsWith("encc#")) {
                                 FlintLogger.JOB_LOGGER.info("Password is encrypted.");
@@ -165,8 +162,7 @@ public class TestConnectorService extends FlintConnectorBase {
                     } else {
                         /**
                          * if password is not passed as a request parameter
-                         * password from config parameter
-                         * will be used
+                         * password from config parameter will be used
                          */
                         password = this.password;
                         FlintLogger.JOB_LOGGER.debug(jobId + " Getting password from config ");
@@ -189,20 +185,19 @@ public class TestConnectorService extends FlintConnectorBase {
                     response.put(STATIC.FIELD.RESULT, result);
 
                     /**
-                     * send response back with result
-                     * 0 = exit-code, 0 for success
-                     * STATIC.MESSAGE.SUCCESS = message
-                     * response = result
+                     * send response back with result 0 = exit-code, 0 for
+                     * success STATIC.MESSAGE.SUCCESS = message response =
+                     * result
                      */
                     request.sendResponse(0, STATIC.MESSAGE.SUCCESS, response);
 
                 } else {
                     FlintLogger.JOB_LOGGER.error(jobId + STATIC.MESSAGE.USERNAME_OR_PASSWORD_NULL);
                     /**
-                     * send response with error
-                     *  -1 = exit-code, negative integers for failure
-                     *  STATIC.MESSAGE.USERNAME_OR_PASSWORD_NULL = failure cause
-                     *  null = no result due to failure
+                     * send response with error -1 = exit-code, negative
+                     * integers for failure
+                     * STATIC.MESSAGE.USERNAME_OR_PASSWORD_NULL = failure cause
+                     * null = no result due to failure
                      */
                     request.sendResponse(-1, STATIC.MESSAGE.USERNAME_OR_PASSWORD_NULL, null);
                 }
@@ -217,5 +212,5 @@ public class TestConnectorService extends FlintConnectorBase {
         }
 
     }
-   
+
 }

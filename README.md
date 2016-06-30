@@ -96,4 +96,11 @@ By navigating into the directory of your Maven project, run command.
 mvn clean install -Dmaven.test.skip=true
 
 ```
+Upon compilation a fat jar will be created in _'**target**'_ directory of your Maven project like **flint-test-connector-1.0.0.0-fat.jar**
+
 ## Testing with Flint
+
+1. Navigate to flint-x.x.x.x/connectors directory in Flint
+2. Copy flint-test-connector-1.0.0.0-fat.jar recently created here
+3. Restart Flint
+4. [Add a Connector to the Grid](http://docs.getflint.io/grid_configuration/connectors#how-to-add-a-connector-to-the-grid)

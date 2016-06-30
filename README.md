@@ -75,7 +75,7 @@ public class TestConnectorService extends FlintConnectorBase {
 }
 ```
 
-You also need to create a json file and place it into _'**src/main/resources**'_ directory of flint-test-connector, having following contents.
+You also need to create a json file and place it into _'src/main/resources'_ directory of flint-test-connector, having following contents.
 
 ```
 {

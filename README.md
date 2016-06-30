@@ -100,6 +100,7 @@ mvn clean install -Dmaven.test.skip=true
 
 ```
 Upon compilation a fat jar will be created in _'target'_ directory of flint-test-connector.
+
 Here, we will have a jar named **flint-test-connector-1.0.0.0-fat.jar**
 
 ## Testing with Flint

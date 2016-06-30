@@ -73,3 +73,27 @@ public class TestConnectorService extends FlintConnectorBase {
 
 }
 ```
+
+You also need to create a json file and place it into _'**src/main/resources**'_ directory of your Maven project.
+
+```
+{
+    "main": "com.infiverve.flint.connector.test.TestConnectorService", # class name which extends FlintConnectorBase of flint-sdk
+    "options": {
+        "worker": true
+    }
+}
+
+```
+
+**_Note: The name of json file should be same as project name_**
+
+## Compile
+
+By navigating into the directory of your Maven project, run command.
+
+```
+mvn clean install -Dmaven.test.skip=true
+
+```
+## Testing with Flint

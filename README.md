@@ -23,7 +23,6 @@ In any Maven project, you will need to add **flint-sdk-1.0.0.1** dependency :
 ## Development
 Writing a Connector is at your fingertips with Flint Software Development Kit, great for relying on IDE auto-completion to write code quickly.
 
-Here's an example:
 We have created a Maven project named flint-test-connector ( version 1.0.0.0 ) with the above dependency added to its pom.xml.
 
 ```

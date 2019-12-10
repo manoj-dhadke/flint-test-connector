@@ -1,22 +1,19 @@
-
 /*
- * Copyright 2016 Infiverve Technologies.
  *
- * Infiverve Technologies licenses this file to you under the Apache License, version 2.0
- * (the "License"); you may not use this file except in compliance with the
- * License.  You may obtain a copy of the License at:
+ * INFIVERVE TECHNOLOGIES PTE LIMITED CONFIDENTIAL
+ * _______________________________________________
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
- * License for the specific language governing permissions and limitations
- * under the License.
- *
- * @author shweta
+ *  (C) INFIVERVE TECHNOLOGIES PTE LIMITED, SINGAPORE
+ *  All Rights Reserved.
+ *  Product / Project: Flint IT Automation Platform
+ *  NOTICE:  All information contained herein is, and remains
+ *  the property of INFIVERVE TECHNOLOGIES PTE LIMITED.
+ *  The intellectual and technical concepts contained
+ *  herein are proprietary to INFIVERVE TECHNOLOGIES PTE LIMITED.
+ *  Dissemination of this information or any form of reproduction of this material
+ *  is strictly forbidden unless prior written permission is obtained
+ *  from INFIVERVE TECHNOLOGIES PTE LIMITED, SINGAPORE.
  */
-
 package com.infiverve.flint.connector.test;
 
 import com.infiverve.flint.exception.EncryptionException;
